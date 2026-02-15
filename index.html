@@ -369,9 +369,43 @@
     /* ========== About / Summary ========== */
     .about-grid {
       display: grid;
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 1fr 2.5fr 1.5fr;
       gap: 3rem;
       align-items: start;
+    }
+    .about-photo {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .about-photo img {
+      width: 100%;
+      border-radius: 12px;
+      border: 3px solid rgba(34,211,238,0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: var(--transition);
+      display: block;
+    }
+    .about-photo::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px solid var(--cyan);
+      border-radius: 12px;
+      z-index: -1;
+      transition: var(--transition);
+    }
+    .about-photo:hover img {
+      transform: translate(-8px, -8px);
+      border-color: var(--cyan);
+    }
+    .about-photo:hover::before {
+      top: 12px;
+      left: 12px;
     }
     .about-text p { color: var(--gray-light); margin-bottom: 1rem; font-size: 0.98rem; }
     .about-text p strong { color: var(--white-bright); }
@@ -868,13 +902,13 @@
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">&lt;<span>IK</span>/&gt;</a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about"><span>01.</span> About</a></li>
-      <li><a href="#experience"><span>02.</span> Experience</a></li>
-      <li><a href="#skills"><span>03.</span> Skills</a></li>
-      <li><a href="#projects"><span>04.</span> Projects</a></li>
-      <li><a href="#education"><span>05.</span> Education</a></li>
-      <li><a href="#certifications"><span>06.</span> Certifications</a></li>
-      <li><a href="#contact"><span>07.</span> Contact</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="mailto:indhrakiranu39@gmail.com" class="resume-btn"><i class="fas fa-envelope"></i> Hire Me</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -922,6 +956,10 @@
 <section id="about" class="section">
   <h2 class="section-label reveal"><span>01.</span> About Me</h2>
   <div class="about-grid">
+    <div class="about-photo reveal">
+      <!-- Place your professional photo as assets/indhra.jpg -->
+      <img src="assets/indhra.jpg" alt="Indhra Kiranu N A - Professional Photo" loading="lazy">
+    </div>
     <div class="about-text reveal">
       <p>
         I'm a cloud-focused Data Scientist with 5+ years of experience specializing in building and deploying
@@ -959,55 +997,9 @@
   </div>
 </section>
 
-<!-- ========== Experience ========== -->
-<section id="experience" class="section">
-  <h2 class="section-label reveal"><span>02.</span> Where I've Worked</h2>
-  <div class="timeline reveal">
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">Senior Data Scientist</span>
-        <span class="timeline-date">Aug 2024 &ndash; Present</span>
-      </div>
-      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
-      <ul>
-        <li>Instrumental in establishing the core battery cell analytics infrastructure for Mercedes Electric Truck development in Stuttgart, managing high-volume data from over 500 cells and 100 global cyclers. Designed and maintained the automated data ingestion pipeline using Azure Data Factory (ADF) to centralize sensor telemetry into Azure Data Lake Storage (ADLS), standardizing all raw data into a structured Delta Table format.</li>
-        <li>Developed and operationalized proprietary analytical scripts to calculate mission-critical KPIs&mdash;including DCIR, State of Health (SOH), and RPT estimation&mdash;and translated these results into dynamic Power BI dashboards, creating a customer-specific framework for R&amp;D engineers to evaluate battery performance, lifetime, and safety.</li>
-        <li>Led the migration of 5 years of vehicle data (100M+ records) to Azure, building robust ADF pipelines that cut ETL time by 80%, ensuring data quality, integrity, and accessibility for modeling and analysis.</li>
-        <li>Developed and deployed ML models and AI solutions including early detection and forecasting of electric Axle failure using an Auto Associative Neural Network (AANN) with TensorFlow, resulting in a one-week early warning on vehicle downtime.</li>
-        <li>Mentored a cross-functional team of 2+ junior engineers in developing vehicle testing cases using an RAG-based open-source LLM, championing Python and ML best practices.</li>
-      </ul>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">Data Scientist</span>
-        <span class="timeline-date">Nov 2020 &ndash; Jul 2024</span>
-      </div>
-      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
-      <ul>
-        <li>Designed an ML-driven Python application that finds important safety flaws in vehicles 90% quicker than with humans; employed a user-friendly, reusable package of unsupervised clustering methods on multi-variate time series data from Trucks, enabling early failure identification and avoiding expensive recalls.</li>
-        <li>Uncovered deeper system features and performance insights by using limited data and domain expertise to close the knowledge gap between analytics and research, offering data-driven solutions through advanced analytics&mdash;Affinity analysis, statistical methods, machine learning algorithms, and data mining techniques.</li>
-      </ul>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">Machine Learning Engineer</span>
-        <span class="timeline-date">May 2020 &ndash; Nov 2020</span>
-      </div>
-      <div class="timeline-company">Upwork &mdash; Freelance, Remote</div>
-      <ul>
-        <li>Analyzed data from retailers across 6 countries and increased book sales by 4.2% by forecasting sales using an ensemble of models with Keras; translated business problems into data science solutions for strategic decision-making and AI initiatives.</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
 <!-- ========== Skills ========== -->
 <section id="skills" class="section">
-  <h2 class="section-label reveal"><span>03.</span> Skills &amp; Technologies</h2>
+  <h2 class="section-label reveal"><span>02.</span> Skills &amp; Technologies</h2>
   <div class="skills-container reveal">
 
     <div class="skill-card">
@@ -1113,7 +1105,7 @@
 
 <!-- ========== Projects ========== -->
 <section id="projects" class="section">
-  <h2 class="section-label reveal"><span>04.</span> Featured Projects</h2>
+  <h2 class="section-label reveal"><span>03.</span> Featured Projects</h2>
   <div class="projects-grid reveal">
 
     <div class="project-card">
@@ -1318,6 +1310,52 @@
     <a href="https://github.com/indhra?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
       <i class="fab fa-github"></i> View All Repositories
     </a>
+  </div>
+</section>
+
+<!-- ========== Experience ========== -->
+<section id="experience" class="section">
+  <h2 class="section-label reveal"><span>04.</span> Where I've Worked</h2>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Senior Data Scientist</span>
+        <span class="timeline-date">Aug 2024 &ndash; Present</span>
+      </div>
+      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
+      <ul>
+        <li>Instrumental in establishing the core battery cell analytics infrastructure for Mercedes Electric Truck development in Stuttgart, managing high-volume data from over 500 cells and 100 global cyclers. Designed and maintained the automated data ingestion pipeline using Azure Data Factory (ADF) to centralize sensor telemetry into Azure Data Lake Storage (ADLS), standardizing all raw data into a structured Delta Table format.</li>
+        <li>Developed and operationalized proprietary analytical scripts to calculate mission-critical KPIs&mdash;including DCIR, State of Health (SOH), and RPT estimation&mdash;and translated these results into dynamic Power BI dashboards, creating a customer-specific framework for R&amp;D engineers to evaluate battery performance, lifetime, and safety.</li>
+        <li>Led the migration of 5 years of vehicle data (100M+ records) to Azure, building robust ADF pipelines that cut ETL time by 80%, ensuring data quality, integrity, and accessibility for modeling and analysis.</li>
+        <li>Developed and deployed ML models and AI solutions including early detection and forecasting of electric Axle failure using an Auto Associative Neural Network (AANN) with TensorFlow, resulting in a one-week early warning on vehicle downtime.</li>
+        <li>Mentored a cross-functional team of 2+ junior engineers in developing vehicle testing cases using an RAG-based open-source LLM, championing Python and ML best practices.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Data Scientist</span>
+        <span class="timeline-date">Nov 2020 &ndash; Jul 2024</span>
+      </div>
+      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
+      <ul>
+        <li>Designed an ML-driven Python application that finds important safety flaws in vehicles 90% quicker than with humans; employed a user-friendly, reusable package of unsupervised clustering methods on multi-variate time series data from Trucks, enabling early failure identification and avoiding expensive recalls.</li>
+        <li>Uncovered deeper system features and performance insights by using limited data and domain expertise to close the knowledge gap between analytics and research, offering data-driven solutions through advanced analytics&mdash;Affinity analysis, statistical methods, machine learning algorithms, and data mining techniques.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Machine Learning Engineer</span>
+        <span class="timeline-date">May 2020 &ndash; Nov 2020</span>
+      </div>
+      <div class="timeline-company">Upwork &mdash; Freelance, Remote</div>
+      <ul>
+        <li>Analyzed data from retailers across 6 countries and increased book sales by 4.2% by forecasting sales using an ensemble of models with Keras; translated business problems into data science solutions for strategic decision-making and AI initiatives.</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
