@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Indhra's Portfolio - Data Scientist & Machine Learning Engineer">
+    <title>Indhra - Data Scientist & ML Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>Indhra</h2>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="gradient-text">Indhra</span>
+                </h1>
+                <h2 class="hero-subtitle">Data Scientist & Machine Learning Engineer</h2>
+                <p class="hero-description">
+                    Passionate about transforming data into actionable insights using Machine Learning, 
+                    Deep Learning, and Natural Language Processing.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/indhra" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/indhra" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:indhra@example.com">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate Data Scientist and Machine Learning Engineer with a deep interest in 
+                        solving complex problems using cutting-edge AI and ML techniques. My journey in data 
+                        science has led me to explore various domains including Natural Language Processing, 
+                        Deep Learning, and Statistical Analysis.
+                    </p>
+                    <p>
+                        I believe in continuous learning and hands-on experimentation. My repositories showcase 
+                        my learning journey from fundamental concepts to advanced implementations in ML and AI.
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me exploring new ML frameworks, participating in 
+                        Kaggle competitions, or contributing to open-source projects.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Machine Learning</h3>
+                    <p>Scikit-learn, TensorFlow, Keras, PyTorch</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Deep Learning</h3>
+                    <p>Neural Networks, CNNs, RNNs, Transformers</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-language"></i>
+                    <h3>NLP & LLMs</h3>
+                    <p>BERT, GPT, Hugging Face, Text Processing</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data Analysis</h3>
+                    <p>Pandas, NumPy, Statistics, Visualization</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                    <p>Advanced Python, Jupyter, Data Structures</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Tools & Platforms</h3>
+                    <p>Git, Tableau, Kaggle, Fast.AI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded dynamically -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-book"></i>
+                        <h3>Natural Language Processing & LLMs</h3>
+                    </div>
+                    <p class="project-description">
+                        From scratch to advanced LLMs - comprehensive learning and hands-on implementations 
+                        covering modern NLP techniques and Large Language Models.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">NLP</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Deep Learning</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/indhra/Natural_Language_Processing_LLMs" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Practical Deep Learning</h3>
+                    </div>
+                    <p class="project-description">
+                        Hands-on coding and comprehensive notes inspired by Jeremy Howard's Fast.AI course, 
+                        covering practical deep learning implementations.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Fast.AI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/indhra/Practical_Deep_learning" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Hands-On Machine Learning</h3>
+                    </div>
+                    <p class="project-description">
+                        Core ML topics with concise summaries, code snippets, and interview preparation materials 
+                        using Scikit-learn, TensorFlow, and Keras.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Scikit-learn</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/indhra/Hands_On_Machine_Learning" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Kaggle Competitions</h3>
+                    </div>
+                    <p class="project-description">
+                        Collection of code from Kaggle competitions and experimental implementations, 
+                        showcasing practical problem-solving skills.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Kaggle</span>
+                        <span class="tag">Competitions</span>
+                        <span class="tag">Data Science</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/indhra/Kaggle" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>HMM on GPS Data</h3>
+                    </div>
+                    <p class="project-description">
+                        Implementation of Hidden Markov Models on GPS data collected by Microsoft, 
+                        demonstrating statistical modeling techniques.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">HMM</span>
+                        <span class="tag">Statistics</span>
+                        <span class="tag">GPS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/indhra/hmm_on_gps" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Practical Statistics for Data Science</h3>
+                    </div>
+                    <p class="project-description">
+                        Comprehensive guide based on "Practical Data Science" by Mr. Bruce, covering 
+                        essential statistical concepts for data scientists.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Statistics</span>
+                        <span class="tag">Data Science</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/indhra/Practical_Statistics_for_DataSciecne" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="more-projects">
+                <a href="https://github.com/indhra?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    View All Repositories <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <p class="contact-description">
+                    I'm always open to discussing new projects, opportunities, or collaborations. 
+                    Feel free to reach out!
+                </p>
+                <div class="contact-methods">
+                    <a href="https://github.com/indhra" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <i class="fab fa-github"></i>
+                        <h3>GitHub</h3>
+                        <p>@indhra</p>
+                    </a>
+                    <a href="mailto:indhra@example.com" class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>indhra@example.com</p>
+                    </a>
+                    <a href="https://linkedin.com/in/indhra" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <i class="fab fa-linkedin"></i>
+                        <h3>LinkedIn</h3>
+                        <p>Connect with me</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Indhra. Built with <i class="fas fa-heart"></i> for Data Science and ML</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
