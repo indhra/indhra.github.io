@@ -911,6 +911,7 @@
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View My Work</a>
+      <!-- Note: Add your resume as assets/Indhra_Kiranu_Resume.pdf for download to work -->
       <a href="assets/Indhra_Kiranu_Resume.pdf" download class="btn btn-outline"><i class="fas fa-download"></i> Download Resume</a>
       <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Get In Touch</a>
     </div>
@@ -1421,6 +1422,7 @@
   <div class="quick-connect-form">
     <h4>Interested in Connecting?</h4>
     <p>Share your details and I'll get back to you quickly!</p>
+    <!-- Note: Configure Formspree endpoint before use. See README.md for setup instructions -->
     <form id="quickConnectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <div class="form-group">
         <label for="name">Name *</label>
@@ -1565,6 +1567,15 @@
   const quickConnectForm = document.getElementById('quickConnectForm');
   if (quickConnectForm) {
     quickConnectForm.addEventListener('submit', async (e) => {
+      const formAction = quickConnectForm.getAttribute('action');
+      
+      // Check if form is configured with a real endpoint
+      if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+        e.preventDefault();
+        alert('Contact form is not yet configured. Please use the email link to get in touch, or contact the site administrator to configure the form.');
+        return;
+      }
+      
       e.preventDefault();
       
       const submitBtn = quickConnectForm.querySelector('.form-submit-btn');
@@ -1572,19 +1583,48 @@
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       submitBtn.disabled = true;
       
-      // For now, just show a success message since form backend needs to be configured
-      // You can integrate with Formspree, Netlify Forms, or your own backend
-      setTimeout(() => {
-        submitBtn.innerHTML = '<i class="fas fa-check"></i> Thanks! I\'ll be in touch soon!';
-        submitBtn.style.background = 'linear-gradient(135deg, var(--green), #047857)';
-        quickConnectForm.reset();
+      try {
+        const formData = new FormData(quickConnectForm);
+        const response = await fetch(formAction, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          const successBtn = submitBtn;
+          successBtn.textContent = '';
+          const icon = document.createElement('i');
+          icon.className = 'fas fa-check';
+          const text = document.createTextNode(' Thanks! I\'ll be in touch soon!');
+          successBtn.appendChild(icon);
+          successBtn.appendChild(text);
+          successBtn.style.background = 'linear-gradient(135deg, var(--green), #047857)';
+          quickConnectForm.reset();
+          
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+          }, 5000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        submitBtn.textContent = '';
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-exclamation-circle';
+        const text = document.createTextNode(' Error sending. Please try email.');
+        submitBtn.appendChild(icon);
+        submitBtn.appendChild(text);
         
         setTimeout(() => {
           submitBtn.innerHTML = originalText;
           submitBtn.disabled = false;
-          submitBtn.style.background = '';
         }, 3000);
-      }, 1000);
+      }
     });
   }
 </script>
