@@ -52,11 +52,13 @@ python3 -m http.server 8000
 2. The download button in the hero section will automatically link to it
 
 ### Contact Form Setup
-The quick connect form is configured to work with Formspree by default. To activate it:
+The quick connect form is already configured with a Formspree endpoint and ready to use.
+
+If you need to change the form endpoint:
 
 1. Sign up at [Formspree.io](https://formspree.io/) (free tier available)
 2. Create a new form and get your form endpoint
-3. In `index.html`, replace `YOUR_FORM_ID` in the form action with your Formspree form ID:
+3. In `index.html`, replace the form ID in the form action:
    ```html
    <form id="quickConnectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
    ```

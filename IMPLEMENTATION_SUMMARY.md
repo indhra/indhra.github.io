@@ -67,10 +67,8 @@
 - Form submission handling with loading states and success feedback
 - Ready to integrate with Formspree, Netlify Forms, or custom backend
 
-**Setup Required:**
-1. Sign up at Formspree.io (free tier available)
-2. Create a new form and get your form endpoint
-3. Replace `YOUR_FORM_ID` in the form action attribute (line ~1386 in index.html)
+**Setup:**
+The form is already configured with a Formspree endpoint and ready to use. Form submissions will be sent to the configured email address.
 
 **Alternative integrations:**
 - Netlify Forms (add `netlify` attribute to form)
