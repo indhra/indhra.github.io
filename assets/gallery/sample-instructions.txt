@@ -1,0 +1,24 @@
+Gallery Photo Instructions
+===========================
+
+To add photos to the gallery:
+
+1. Place your image files (jpg, png, gif, etc.) in this folder: assets/gallery/
+
+2. Update the JavaScript in index.html:
+   - Find the 'galleryPhotos' array in the initGalleryCarousel() function
+   - Add your photo filenames to the array, for example:
+   
+   const galleryPhotos = [
+     'photo1.jpg',
+     'photo2.png',
+     'vacation-beach.jpg',
+   ];
+
+3. The carousel will:
+   - Auto-advance every 3 seconds when visible
+   - Allow manual navigation with left/right buttons
+   - Support keyboard arrows and touch swipes
+   - Show indicators for each photo
+
+Supported formats: .jpg, .jpeg, .png, .gif, .webp
