@@ -1,0 +1,55 @@
+{
+  "lastUpdated": "2026-02-15T18:18:23Z",
+  "repository": "indhra/indhra.github.io",
+  "totalChanges": 6,
+  "changes": [
+    {
+      "number": 8,
+      "title": "[WIP] Set dark mode as default theme",
+      "mergedAt": null,
+      "author": "Copilot",
+      "url": "https://github.com/indhra/indhra.github.io/pull/8",
+      "labels": []
+    },
+    {
+      "number": 7,
+      "title": "Enhance portfolio design and fix light theme visibility",
+      "mergedAt": null,
+      "author": "Copilot",
+      "url": "https://github.com/indhra/indhra.github.io/pull/7",
+      "labels": []
+    },
+    {
+      "number": 5,
+      "title": "Rename Indhra_Kiranu_DataScientist.pdf to Indhra_Kiranu_Resume.pdf",
+      "mergedAt": null,
+      "author": "indhra",
+      "url": "https://github.com/indhra/indhra.github.io/pull/5",
+      "labels": []
+    },
+    {
+      "number": 2,
+      "title": "Redesign portfolio as modern dark-themed site with real GitHub projects",
+      "mergedAt": null,
+      "author": "Copilot",
+      "url": "https://github.com/indhra/indhra.github.io/pull/2",
+      "labels": []
+    },
+    {
+      "number": 1,
+      "title": "Build static portfolio website for GitHub Pages",
+      "mergedAt": null,
+      "author": "Copilot",
+      "url": "https://github.com/indhra/indhra.github.io/pull/1",
+      "labels": []
+    },
+    {
+      "number": 4,
+      "title": "Add proprietary copyright protection and legal notices",
+      "mergedAt": null,
+      "author": "Copilot",
+      "url": "https://github.com/indhra/indhra.github.io/pull/4",
+      "labels": []
+    }
+  ]
+}

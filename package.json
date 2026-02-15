@@ -4,6 +4,8 @@
   "description": "Personal portfolio website for Indhra Kiranu N A",
   "scripts": {
     "generate-gallery": "node generate-gallery-list.js",
+    "generate-changelog": "node generate-changelog.js",
+    "generate-all": "npm run generate-gallery && npm run generate-changelog",
     "serve": "python3 -m http.server 8000"
   },
   "keywords": [
