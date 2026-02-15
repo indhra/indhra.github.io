@@ -1,70 +1,47 @@
-# Indhra's Portfolio
+# Indhra Kiranu N A – Portfolio
 
-A modern, responsive portfolio website showcasing my work in Data Science, Machine Learning, and Natural Language Processing.
+A modern, dark-themed portfolio website for a Cloud-focused Data Scientist with 5+ years of experience at Mercedes-Benz R&D.
 
 🌐 **Live Site:** [https://indhra.github.io](https://indhra.github.io)
 
 ## Features
 
-- ✨ **Modern Design**: Clean, professional design with smooth animations
-- 🌓 **Dark/Light Theme**: Toggle between themes with localStorage persistence
-- 📱 **Fully Responsive**: Optimized for desktop, tablet, and mobile devices
-- 🎨 **Beautiful UI**: Gradient color schemes and modern typography
-- 🚀 **Fast & Lightweight**: Pure HTML/CSS/JS with no framework dependencies
-- ♿ **Accessible**: Semantic HTML and ARIA-friendly design
+- 🌑 **Dark Navy Theme**: Professional design with cyan/blue accents and smooth animations
+- 📱 **Fully Responsive**: Optimized for desktop, tablet, and mobile with hamburger navigation
+- ♿ **Accessible**: ARIA attributes, keyboard navigation, focus management, Escape key support
+- 🚀 **Self-Contained**: Single `index.html` file with inline CSS/JS — no external dependencies except fonts/icons
+- ✨ **Scroll Animations**: IntersectionObserver-powered reveal effects
+- 🔗 **Real Projects**: 12 project cards linked to actual GitHub repositories
 
 ## Sections
 
-1. **Hero** - Introduction and call-to-action buttons
-2. **About** - Personal introduction and background
-3. **Skills** - Technical skills and technologies showcase
-4. **Projects** - Featured repositories and work highlights
-5. **Contact** - Social links and contact information
+1. **Hero** — Name, tagline, and call-to-action buttons
+2. **About** — Professional summary with key metric highlight cards
+3. **Experience** — Timeline with 3 roles (Senior Data Scientist, Data Scientist, ML Engineer)
+4. **Skills** — 9 categorized card groups with pill-shaped tags
+5. **Projects** — 12 featured GitHub repositories
+6. **Education** — M.Tech & B.Tech with GPA badges
+7. **Certifications** — Azure, Kaggle, courses, and awards
+8. **Contact** — Email, LinkedIn, GitHub, Kaggle links
 
 ## Technologies Used
 
-- HTML5
-- CSS3 (with CSS Variables)
-- Vanilla JavaScript
-- Font Awesome Icons
+- HTML5 (semantic, self-contained)
+- CSS3 (CSS Variables, Grid, Flexbox, `@supports` queries)
+- Vanilla JavaScript (IntersectionObserver, keyboard event handling)
+- Google Fonts (Inter, Space Grotesk)
+- Font Awesome 6 Icons
 - GitHub Pages for hosting
-
-## Featured Projects
-
-The portfolio highlights key repositories including:
-- Natural Language Processing & LLMs
-- Practical Deep Learning (Fast.AI)
-- Hands-On Machine Learning
-- Kaggle Competitions
-- Statistical Modeling Projects
 
 ## Local Development
 
-To run the portfolio locally:
-
 ```bash
-# Clone the repository
 git clone https://github.com/indhra/indhra.github.io.git
 cd indhra.github.io
-
-# Start a local server
-python -m http.server 8000
-# or
 python3 -m http.server 8000
-
-# Open in browser
-# Navigate to http://localhost:8000
+# Open http://localhost:8000
 ```
-
-## Customization
-
-To customize the portfolio for your own use:
-
-1. Update personal information in `index.html`
-2. Modify colors in `styles.css` by changing CSS variables
-3. Add/remove projects in the Projects section
-4. Update social links and contact information
 
 ## License
 
-© 2026 Indhra. All rights reserved.
+© 2025 Indhra Kiranu N A. All rights reserved.
