@@ -31,6 +31,15 @@ try {
       return IMAGE_EXTENSIONS.includes(ext);
     })
     .sort(); // Sort alphabetically for consistent ordering
+
+  // Validate that filenames do not contain spaces, which can break image URLs in browsers
+  const invalidPhotoFiles = photoFiles.filter(file => file.includes(' '));
+  if (invalidPhotoFiles.length > 0) {
+    console.error('❌ The following image files have spaces in their names and cannot be processed:');
+    invalidPhotoFiles.forEach(file => console.error(`   - ${file}`));
+    console.error('\nPlease rename these files to remove spaces (for example, replace spaces with "-" or "_") and run this script again.');
+    process.exit(1);
+  }
   
   // Create the JSON output
   const output = {
