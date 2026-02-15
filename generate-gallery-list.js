@@ -17,6 +17,10 @@ const OUTPUT_FILE = path.join(__dirname, 'assets', 'gallery', 'photos.json');
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
 
 try {
+  // Ensure the gallery directory exists; create it if it does not
+  if (!fs.existsSync(GALLERY_DIR)) {
+    fs.mkdirSync(GALLERY_DIR, { recursive: true });
+  }
   // Read all files in the gallery directory
   const files = fs.readdirSync(GALLERY_DIR);
   
