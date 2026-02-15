@@ -56,6 +56,22 @@ python3 -m http.server 8000
 # Navigate to http://localhost:8000
 ```
 
+## Adding Images
+
+The website supports custom images for personalization:
+
+1. **Add your images** to the `images/` directory:
+   - `images/profile/` - Profile photo (recommended: 400x400px)
+   - `images/projects/` - Project screenshots (recommended: 1200x675px)
+   - `images/skills/` - Skill-related images (optional)
+   - `images/general/` - Other images
+
+2. **Optimize images** before adding them (keep under 200KB each)
+
+3. **Update references** in `index.html` to use your images
+
+See `images/README.md` for detailed guidelines on image formats, sizes, and best practices.
+
 ## Customization
 
 To customize the portfolio for your own use:
@@ -64,6 +80,7 @@ To customize the portfolio for your own use:
 2. Modify colors in `styles.css` by changing CSS variables
 3. Add/remove projects in the Projects section
 4. Update social links and contact information
+5. Add your images to the `images/` directory (see above)
 
 ## License
 
