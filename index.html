@@ -79,28 +79,45 @@
     body.light-theme .skill-card,
     body.light-theme .project-card,
     body.light-theme .edu-card,
-    body.light-theme .cert-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    body.light-theme .cert-item {
+      background: #ffffff !important;
+      border: 2px solid #e2e8f0 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04) !important;
     }
 
     body.light-theme .highlight-card:hover,
     body.light-theme .skill-card:hover,
     body.light-theme .project-card:hover,
     body.light-theme .edu-card:hover,
-    body.light-theme .cert-card:hover {
-      border-color: #0891b2;
-      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
+    body.light-theme .cert-item:hover {
+      border-color: #0891b2 !important;
+      box-shadow: 0 8px 24px rgba(8, 145, 178, 0.2), 0 4px 12px rgba(8, 145, 178, 0.1) !important;
+      transform: translateY(-4px) !important;
     }
 
     body.light-theme .timeline-item {
-      border-left-color: #cbd5e1;
+      border-left-color: #cbd5e1 !important;
     }
 
     body.light-theme .timeline-item::before {
-      background: #ffffff;
-      border-color: #0891b2;
+      background: #ffffff !important;
+      border-color: #0891b2 !important;
+      box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.2) !important;
+    }
+    
+    /* Light theme: Make sure all text is visible */
+    body.light-theme .hero-name,
+    body.light-theme .section-label {
+      background: linear-gradient(135deg, #0f172a 0%, #0891b2 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+    }
+    
+    /* Light theme: Ensure backgrounds don't use gradients that blend with white */
+    body.light-theme .project-card::after,
+    body.light-theme .skill-card::before {
+      display: none !important;
     }
 
     /* ========== Reset & Base ========== */
