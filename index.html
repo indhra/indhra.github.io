@@ -1322,6 +1322,7 @@
   const navLinks = document.getElementById('navLinks');
   function toggleMenu() {
     navLinks.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
   }
   hamburger.addEventListener('click', toggleMenu);
   hamburger.addEventListener('keydown', (e) => {
