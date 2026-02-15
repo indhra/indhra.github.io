@@ -68,6 +68,44 @@ Alternatively, you can integrate with:
 - Your own backend API
 - Other form services like FormSubmit, Basin, etc.
 
-## License
+## License & Copyright
 
-© 2025 Indhra Kiranu N A. All rights reserved.
+**PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED**
+
+Copyright © 2025 Indhra Kiranu N A. All Rights Reserved.
+
+This portfolio website and all its contents are proprietary and confidential. 
+Unauthorized copying, modification, distribution, or use of this code is 
+**strictly prohibited** and will result in legal action.
+
+### Usage Restrictions
+
+❌ **Prohibited Actions:**
+- Copying or reproducing any part of this code
+- Using this code as a template or reference
+- Modifying or creating derivative works
+- Distributing or sharing this code
+- Commercial or non-commercial use without permission
+
+✅ **Viewing Only:**
+- You may view this website in a web browser
+- You may view the source for educational purposes only (no copying)
+
+### Legal Protection
+
+This work is protected by:
+- Copyright laws and international treaties
+- Digital Millennium Copyright Act (DMCA)
+- Berne Convention for the Protection of Literary and Artistic Works
+
+**Legal Consequences:**
+Unauthorized use will result in civil and criminal prosecution, including 
+damages, penalties, and recovery of legal fees.
+
+### Contact for Permission
+
+For licensing inquiries or permission requests:
+- **Email:** indhrakiranu39@gmail.com
+- **LinkedIn:** [linkedin.com/in/indhra](https://www.linkedin.com/in/indhra/)
+
+See [LICENSE](LICENSE), [COPYRIGHT](COPYRIGHT), and [NOTICE](NOTICE) files for complete legal terms.
