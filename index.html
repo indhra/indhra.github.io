@@ -2119,27 +2119,43 @@
 
   // ========== Gallery Carousel ==========
   // Load photos from the assets/gallery folder and create carousel
-  function initGalleryCarousel() {
+  async function initGalleryCarousel() {
     const galleryCarousel = document.getElementById('galleryCarousel');
     const galleryIndicators = document.getElementById('galleryIndicators');
     const galleryContainer = document.getElementById('galleryContainer');
     const prevBtn = document.getElementById('galleryPrev');
     const nextBtn = document.getElementById('galleryNext');
     
-    // List of photo filenames in the gallery folder
-    // Update this array when adding new photos
-    const galleryPhotos = [
-      // Add photo filenames here, e.g.:
-      // 'photo1.jpg',
-      // 'photo2.jpg',
-      // 'photo3.png',
-    ];
+    // Automatically load photo list from generated JSON file
+    // Run 'npm run generate-gallery' or 'node generate-gallery-list.js' to update the list
+    let galleryPhotos = [];
+    
+    try {
+      const response = await fetch('assets/gallery/photos.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      galleryPhotos = data.photos || [];
+    } catch (error) {
+      console.warn('Could not load gallery photos:', error);
+      // Fallback: show instructions
+      galleryContainer.innerHTML = `
+        <div class="gallery-empty">
+          <i class="fas fa-images"></i>
+          <p>Photos not loaded. Add photos to the <code>assets/gallery/</code> folder and run <code>npm run generate-gallery</code> to update the list.</p>
+        </div>
+      `;
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      return;
+    }
 
     if (galleryPhotos.length === 0) {
       galleryContainer.innerHTML = `
         <div class="gallery-empty">
           <i class="fas fa-images"></i>
-          <p>No photos in the gallery yet. Add photos to the <code>assets/gallery/</code> folder and update the photo list in the JavaScript.</p>
+          <p>No photos in the gallery yet. Add photos to the <code>assets/gallery/</code> folder and run <code>npm run generate-gallery</code> to update the list.</p>
         </div>
       `;
       prevBtn.style.display = 'none';

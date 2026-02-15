@@ -1,0 +1,16 @@
+{
+  "name": "indhra-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for Indhra Kiranu N A",
+  "scripts": {
+    "generate-gallery": "node generate-gallery-list.js",
+    "serve": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website"
+  ],
+  "author": "Indhra Kiranu N A",
+  "license": "UNLICENSED",
+  "private": true
+}
