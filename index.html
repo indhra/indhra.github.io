@@ -2154,7 +2154,9 @@
     galleryPhotos.forEach((photo, index) => {
       const slide = document.createElement('div');
       slide.className = 'gallery-slide';
-      slide.innerHTML = `<img src="assets/gallery/${photo}" alt="Gallery photo ${index + 1}" loading="lazy">`;
+      // Use filename (without extension) as alt text for better accessibility
+      const altText = photo.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+      slide.innerHTML = `<img src="assets/gallery/${photo}" alt="${altText}" loading="lazy">`;
       galleryCarousel.appendChild(slide);
 
       // Create indicator
@@ -2236,9 +2238,7 @@
     });
 
     // Keyboard navigation
-    // Threshold for visibility check - 50% of gallery must be visible
-    const VISIBILITY_THRESHOLD = 0.5;
-    const SWIPE_THRESHOLD = 50; // pixels
+    const SWIPE_THRESHOLD = 50; // pixels for swipe detection
     
     document.addEventListener('keydown', (e) => {
       // Only handle keyboard navigation when gallery section is visible and no input is focused
