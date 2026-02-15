@@ -61,7 +61,7 @@ async function fetchMergedPRs() {
   try {
     const prs = await httpsRequest(url);
     
-    // Filter only merged PRs
+    // Filter only merged PRs (merged_at must not be null)
     const mergedPRs = prs
       .filter(pr => pr.merged_at !== null)
       .map(pr => ({
@@ -74,6 +74,7 @@ async function fetchMergedPRs() {
         labels: pr.labels.map(label => label.name)
       }));
     
+    console.log(`📊 Found ${prs.length} closed PRs, ${mergedPRs.length} are merged`);
     return mergedPRs;
   } catch (error) {
     console.warn('⚠️  Could not fetch PRs from GitHub:', error.message);

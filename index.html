@@ -1952,15 +1952,15 @@
 <!-- ========== Footer ========== -->
 <footer>
   <p>Designed &amp; Built by <a href="https://github.com/indhra" target="_blank" rel="noopener noreferrer">Indhra Kiranu N A</a></p>
-  <p id="lastUpdated" style="font-size: 0.85rem; color: var(--gray-light); margin-top: 0.3rem;">
-    <i class="fas fa-clock"></i> Last updated: <span id="lastUpdatedDate">Loading...</span>
-    <span id="changelogLink" style="margin-left: 0.5rem; display: none;">
-      • <a href="#" id="viewChangelog" style="color: var(--cyan); text-decoration: none;">View changelog</a>
-    </span>
-  </p>
   <p>&copy; 2025 Indhra Kiranu N A &middot; All Rights Reserved &middot; Proprietary &amp; Confidential</p>
   <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.8;">
     Unauthorized copying, distribution, or use of this code is strictly prohibited and will result in legal action.
+  </p>
+  <p id="lastUpdated" style="font-size: 0.7rem; color: var(--gray-dark); margin-top: 0.8rem; opacity: 0.6;">
+    <i class="fas fa-clock" style="font-size: 0.65rem;"></i> Last updated: <span id="lastUpdatedDate">Loading...</span>
+    <span id="changelogLink" style="margin-left: 0.3rem; display: none;">
+      • <a href="#" id="viewChangelog" style="color: var(--gray-light); text-decoration: none; font-size: 0.7rem;">changelog</a>
+    </span>
   </p>
 </footer>
 
@@ -2345,7 +2345,8 @@
 
   // ========== Last Updated & Changelog ==========
   // Load and display last updated information from changelog
-  async function loadLastUpdated() {
+  (function() {
+    let changelogInitialized = false;
     const lastUpdatedDate = document.getElementById('lastUpdatedDate');
     const changelogLink = document.getElementById('changelogLink');
     const viewChangelogBtn = document.getElementById('viewChangelog');
@@ -2353,101 +2354,111 @@
     const closeChangelogBtn = document.getElementById('closeChangelog');
     const changelogContent = document.getElementById('changelogContent');
     
-    try {
-      const response = await fetch('changelog.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
+    // Setup modal event listeners once
+    function setupModalListeners() {
+      if (changelogInitialized) return;
+      changelogInitialized = true;
       
-      // Display last updated date
-      const lastUpdate = new Date(data.lastUpdated);
-      const formattedDate = lastUpdate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
+      viewChangelogBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        changelogModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
       });
-      lastUpdatedDate.textContent = formattedDate;
       
-      // Show changelog link if there are changes
-      if (data.changes && data.changes.length > 0) {
-        changelogLink.style.display = 'inline';
-        
-        // Build changelog content
-        let changelogHTML = `<p style="color: var(--gray-light); margin-bottom: 1.5rem;">Total changes: ${data.totalChanges}</p>`;
-        changelogHTML += '<div style="max-height: 500px; overflow-y: auto;">';
-        
-        data.changes.forEach((change, index) => {
-          const date = change.mergedAt ? new Date(change.mergedAt).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          }) : 'Pending';
-          
-          changelogHTML += `
-            <div style="border-left: 3px solid var(--cyan); padding-left: 1rem; margin-bottom: 1.5rem; ${index === 0 ? 'background: rgba(0, 213, 255, 0.05); padding: 1rem; border-radius: 4px;' : ''}">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <h3 style="margin: 0; font-size: 1rem; color: var(--text-primary);">
-                  <a href="${change.url}" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: none;">
-                    #${change.number}
-                  </a>
-                  ${change.title}
-                </h3>
-                <span style="font-size: 0.85rem; color: var(--gray-light); white-space: nowrap; margin-left: 1rem;">${date}</span>
-              </div>
-              <p style="font-size: 0.85rem; color: var(--gray-light); margin: 0;">
-                By ${change.author}
-              </p>
-            </div>
-          `;
-        });
-        
-        changelogHTML += '</div>';
-        changelogContent.innerHTML = changelogHTML;
-        
-        // Modal functionality
-        viewChangelogBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          changelogModal.style.display = 'block';
-          document.body.style.overflow = 'hidden';
-        });
-        
-        closeChangelogBtn.addEventListener('click', () => {
+      closeChangelogBtn.addEventListener('click', () => {
+        changelogModal.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && changelogModal.style.display === 'block') {
           changelogModal.style.display = 'none';
           document.body.style.overflow = '';
-        });
-        
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && changelogModal.style.display === 'block') {
-            changelogModal.style.display = 'none';
-            document.body.style.overflow = '';
-          }
-        });
-        
-        // Close on background click
-        changelogModal.addEventListener('click', (e) => {
-          if (e.target === changelogModal) {
-            changelogModal.style.display = 'none';
-            document.body.style.overflow = '';
-          }
-        });
-      }
-      
-    } catch (error) {
-      console.warn('Could not load changelog:', error);
-      // Fallback: show current year
-      const currentDate = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
+        }
       });
-      lastUpdatedDate.textContent = currentDate;
+      
+      // Close on background click
+      changelogModal.addEventListener('click', (e) => {
+        if (e.target === changelogModal) {
+          changelogModal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      });
     }
-  }
-  
-  // Load last updated info when page loads
-  loadLastUpdated();
+    
+    async function loadLastUpdated() {
+      try {
+        const response = await fetch('changelog.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        
+        // Display last updated date
+        const lastUpdate = new Date(data.lastUpdated);
+        const formattedDate = lastUpdate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+        lastUpdatedDate.textContent = formattedDate;
+        
+        // Show changelog link if there are changes
+        if (data.changes && data.changes.length > 0) {
+          changelogLink.style.display = 'inline';
+          
+          // Build changelog content
+          let changelogHTML = `<p style="color: var(--gray-light); margin-bottom: 1.5rem;">Total changes: ${data.totalChanges}</p>`;
+          changelogHTML += '<div style="max-height: 500px; overflow-y: auto;">';
+          
+          data.changes.forEach((change, index) => {
+            const date = change.mergedAt ? new Date(change.mergedAt).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            }) : 'Pending';
+            
+            changelogHTML += `
+              <div style="border-left: 3px solid var(--cyan); padding-left: 1rem; margin-bottom: 1.5rem; ${index === 0 ? 'background: rgba(0, 213, 255, 0.05); padding: 1rem; border-radius: 4px;' : ''}">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <h3 style="margin: 0; font-size: 1rem; color: var(--text-primary);">
+                    <a href="${change.url}" target="_blank" rel="noopener noreferrer" style="color: var(--cyan); text-decoration: none;">
+                      #${change.number}
+                    </a>
+                    ${change.title}
+                  </h3>
+                  <span style="font-size: 0.85rem; color: var(--gray-light); white-space: nowrap; margin-left: 1rem;">${date}</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--gray-light); margin: 0;">
+                  By ${change.author}
+                </p>
+              </div>
+            `;
+          });
+          
+          changelogHTML += '</div>';
+          changelogContent.innerHTML = changelogHTML;
+          
+          // Setup modal listeners
+          setupModalListeners();
+        }
+        
+      } catch (error) {
+        console.warn('Could not load changelog:', error);
+        // Fallback: show current year
+        const currentDate = new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+        lastUpdatedDate.textContent = currentDate;
+      }
+    }
+    
+    // Load last updated info when page loads
+    loadLastUpdated();
+  })();
 </script>
 
 </body>
