@@ -49,8 +49,8 @@
 
     /* ========== Light Theme ========== */
     body.light-theme {
-      --navy: #f8fafc;
-      --navy-light: #f1f5f9;
+      --navy: #ffffff;
+      --navy-light: #ffffff;
       --navy-lighter: #e2e8f0;
       --blue: #2563eb;
       --blue-light: #3b82f6;
@@ -61,6 +61,35 @@
       --gray-light: #334155;
       --green: #059669;
       --accent: #6366f1;
+    }
+
+    /* Light theme specific card styling for better visibility */
+    body.light-theme .highlight-card,
+    body.light-theme .skill-card,
+    body.light-theme .project-card,
+    body.light-theme .edu-card,
+    body.light-theme .cert-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-theme .highlight-card:hover,
+    body.light-theme .skill-card:hover,
+    body.light-theme .project-card:hover,
+    body.light-theme .edu-card:hover,
+    body.light-theme .cert-card:hover {
+      border-color: #0891b2;
+      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
+    }
+
+    body.light-theme .timeline-item {
+      border-left-color: #cbd5e1;
+    }
+
+    body.light-theme .timeline-item::before {
+      background: #ffffff;
+      border-color: #0891b2;
     }
 
     /* ========== Reset & Base ========== */
