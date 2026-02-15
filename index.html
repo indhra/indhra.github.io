@@ -853,7 +853,7 @@
         <li>Developed and operationalized proprietary analytical scripts to calculate mission-critical KPIs&mdash;including DCIR, State of Health (SOH), and RPT estimation&mdash;and translated these results into dynamic Power BI dashboards, creating a customer-specific framework for R&amp;D engineers to evaluate battery performance, lifetime, and safety.</li>
         <li>Led the migration of 5 years of vehicle data (100M+ records) to Azure, building robust ADF pipelines that cut ETL time by 80%, ensuring data quality, integrity, and accessibility for modeling and analysis.</li>
         <li>Developed and deployed ML models and AI solutions including early detection and forecasting of electric Axle failure using an Auto Associative Neural Network (AANN) with TensorFlow, resulting in a one-week early warning on vehicle downtime.</li>
-        <li>Mentored a cross-functional team of 2+ juniors in developing vehicle testing cases using an RAG-based open-source LLM, championing Python and ML best practices.</li>
+        <li>Mentored a cross-functional team of 2+ junior engineers in developing vehicle testing cases using an RAG-based open-source LLM, championing Python and ML best practices.</li>
       </ul>
     </div>
 
@@ -1320,8 +1320,15 @@
   // Mobile menu toggle
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
+  function toggleMenu() {
     navLinks.classList.toggle('active');
+  }
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
   });
   // Close menu on link click
   navLinks.querySelectorAll('a').forEach(link => {
