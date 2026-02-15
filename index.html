@@ -1054,6 +1054,111 @@
       line-height: 1.5;
     }
 
+    /* ========== Gallery ========== */
+    .gallery-container {
+      position: relative;
+      max-width: 900px;
+      margin: 3rem auto;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+    .gallery-carousel {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    .gallery-slide {
+      min-width: 100%;
+      position: relative;
+      background: linear-gradient(135deg, rgba(17, 34, 64, 0.6) 0%, rgba(29, 52, 97, 0.4) 100%);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 16/9;
+    }
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-height: 600px;
+    }
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(10, 25, 47, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(34, 211, 238, 0.3);
+      color: var(--cyan);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 10;
+      font-size: 1.2rem;
+    }
+    .gallery-nav-btn:hover {
+      background: rgba(34, 211, 238, 0.2);
+      border-color: var(--cyan);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .gallery-nav-btn.prev {
+      left: 1rem;
+    }
+    .gallery-nav-btn.next {
+      right: 1rem;
+    }
+    .gallery-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .gallery-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .gallery-indicator.active {
+      background: var(--cyan);
+      width: 30px;
+      border-radius: 5px;
+    }
+    .gallery-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--gray);
+      font-size: 1rem;
+    }
+    .gallery-empty i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--cyan);
+      opacity: 0.5;
+    }
+    @media (max-width: 768px) {
+      .gallery-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      .gallery-nav-btn.prev {
+        left: 0.5rem;
+      }
+      .gallery-nav-btn.next {
+        right: 0.5rem;
+      }
+    }
+
     /* ========== Contact ========== */
     #contact {
       text-align: center;
@@ -1241,6 +1346,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#contact" class="status-badge">Open to Work</a></li>
     </ul>
@@ -1777,9 +1883,28 @@
   </div>
 </section>
 
+<!-- ========== Gallery ========== -->
+<section id="gallery" class="section">
+  <h2 class="section-label reveal"><span>07.</span> Gallery</h2>
+  <div class="gallery-container reveal" id="galleryContainer">
+    <div class="gallery-carousel" id="galleryCarousel">
+      <!-- Gallery slides will be loaded here dynamically -->
+    </div>
+    <button class="gallery-nav-btn prev" id="galleryPrev" aria-label="Previous image">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="gallery-nav-btn next" id="galleryNext" aria-label="Next image">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+  <div class="gallery-indicators" id="galleryIndicators">
+    <!-- Indicators will be added here dynamically -->
+  </div>
+</section>
+
 <!-- ========== Contact ========== -->
 <section id="contact" class="reveal">
-  <h2 class="section-label"><span>07.</span> What's Next?</h2>
+  <h2 class="section-label"><span>08.</span> What's Next?</h2>
   <h3 class="contact-heading">Get In Touch</h3>
   <p class="contact-text">
     I'm currently open to new opportunities in Data Science, ML Engineering, and AI roles.
@@ -1853,23 +1978,14 @@
     }
   }
 
-  // Check for saved theme preference or use system preference
+  // Check for saved theme preference or default to dark mode
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
     setTheme(savedTheme);
   } else {
-    // Use system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(prefersDark ? 'dark' : 'light');
+    // Default to dark mode
+    setTheme('dark');
   }
-
-  // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    // Only apply system preference if user hasn't set a preference
-    if (!localStorage.getItem('theme')) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
-  });
 
   // Theme toggle click handler
   themeToggle.addEventListener('click', () => {
@@ -2000,6 +2116,195 @@
       }
     });
   }
+
+  // ========== Gallery Carousel ==========
+  // Load photos from the assets/gallery folder and create carousel
+  function initGalleryCarousel() {
+    const galleryCarousel = document.getElementById('galleryCarousel');
+    const galleryIndicators = document.getElementById('galleryIndicators');
+    const galleryContainer = document.getElementById('galleryContainer');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    
+    // List of photo filenames in the gallery folder
+    // Update this array when adding new photos
+    const galleryPhotos = [
+      // Add photo filenames here, e.g.:
+      // 'photo1.jpg',
+      // 'photo2.jpg',
+      // 'photo3.png',
+    ];
+
+    if (galleryPhotos.length === 0) {
+      galleryContainer.innerHTML = `
+        <div class="gallery-empty">
+          <i class="fas fa-images"></i>
+          <p>No photos in the gallery yet. Add photos to the <code>assets/gallery/</code> folder and update the photo list in the JavaScript.</p>
+        </div>
+      `;
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      return;
+    }
+
+    // Configuration constants
+    const AUTO_SCROLL_INTERVAL = 3000; // milliseconds between slides
+    const SWIPE_THRESHOLD = 50; // pixels for swipe detection
+    const VISIBILITY_THRESHOLD = 0.5; // 50% of gallery must be visible to auto-scroll
+
+    let currentSlide = 0;
+    let autoScrollInterval = null;
+
+    // Create carousel slides
+    galleryPhotos.forEach((photo, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'gallery-slide';
+      // Use filename (without extension) as alt text for better accessibility
+      // Capitalize first letter of each word
+      const altText = photo
+        .replace(/\.[^/.]+$/, '')
+        .replace(/[-_]/g, ' ')
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      slide.innerHTML = `<img src="assets/gallery/${photo}" alt="${altText}" loading="lazy">`;
+      galleryCarousel.appendChild(slide);
+
+      // Create indicator
+      const indicator = document.createElement('div');
+      indicator.className = `gallery-indicator ${index === 0 ? 'active' : ''}`;
+      indicator.addEventListener('click', () => goToSlide(index));
+      galleryIndicators.appendChild(indicator);
+    });
+
+    // Update carousel position
+    function updateCarousel() {
+      galleryCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update indicators
+      const indicators = galleryIndicators.querySelectorAll('.gallery-indicator');
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    // Go to specific slide
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+      resetAutoScroll();
+    }
+
+    // Next slide
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % galleryPhotos.length;
+      updateCarousel();
+    }
+
+    // Previous slide
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length;
+      updateCarousel();
+    }
+
+    // Auto-scroll functionality
+    function startAutoScroll() {
+      autoScrollInterval = setInterval(nextSlide, AUTO_SCROLL_INTERVAL);
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    }
+
+    function resetAutoScroll() {
+      stopAutoScroll();
+      startAutoScroll();
+    }
+
+    // Intersection Observer to start/stop auto-scroll when gallery is in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startAutoScroll();
+        } else {
+          stopAutoScroll();
+        }
+      });
+    }, { threshold: VISIBILITY_THRESHOLD });
+
+    observer.observe(galleryContainer);
+
+    // Event listeners for navigation buttons
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoScroll();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoScroll();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      // Only handle keyboard navigation when gallery section is visible and no input is focused
+      const activeElement = document.activeElement;
+      const isInputFocused = activeElement && (
+        activeElement.tagName === 'INPUT' || 
+        activeElement.tagName === 'TEXTAREA' ||
+        activeElement.isContentEditable
+      );
+      
+      if (isInputFocused) return;
+      
+      const gallerySection = document.getElementById('gallery');
+      const rect = gallerySection.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isVisible && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        e.preventDefault(); // Prevent page scrolling
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+          resetAutoScroll();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+          resetAutoScroll();
+        }
+      }
+    });
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    galleryContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    galleryContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - SWIPE_THRESHOLD) {
+        // Swipe left - next slide
+        nextSlide();
+        resetAutoScroll();
+      }
+      if (touchEndX > touchStartX + SWIPE_THRESHOLD) {
+        // Swipe right - previous slide
+        prevSlide();
+        resetAutoScroll();
+      }
+    }
+  }
+
+  // Initialize gallery carousel when page loads
+  initGalleryCarousel();
 </script>
 
 </body>
