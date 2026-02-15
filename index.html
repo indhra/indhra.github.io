@@ -35,6 +35,22 @@
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* ========== Light Theme ========== */
+    body.light-theme {
+      --navy: #f8fafc;
+      --navy-light: #f1f5f9;
+      --navy-lighter: #e2e8f0;
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --cyan: #0891b2;
+      --white: #1e293b;
+      --white-bright: #0f172a;
+      --gray: #475569;
+      --gray-light: #334155;
+      --green: #059669;
+      --accent: #6366f1;
+    }
+
     /* ========== Reset & Base ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -44,6 +60,7 @@
       color: var(--white);
       line-height: 1.7;
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
     }
     ::selection { background: var(--blue); color: #fff; }
     a { color: var(--cyan); text-decoration: none; transition: var(--transition); }
@@ -122,6 +139,27 @@
     }
     .nav-links .resume-btn:hover { background: rgba(34,211,238,0.1); }
     .nav-links .resume-btn::after { display: none; }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      border-radius: 4px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      margin-left: 1rem;
+      font-size: 1rem;
+    }
+    .theme-toggle:hover {
+      background: rgba(34,211,238,0.1);
+      transform: rotate(20deg);
+    }
 
     /* Mobile menu */
     .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
@@ -781,6 +819,9 @@
       <li><a href="#contact"><span>07.</span> Contact</a></li>
       <li><a href="mailto:indhrakiranu39@gmail.com" class="resume-btn"><i class="fas fa-envelope"></i> Hire Me</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fas fa-sun"></i>
+    </button>
     <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks" tabindex="0">
       <span></span><span></span><span></span>
     </div>
@@ -1332,6 +1373,51 @@
 
 <!-- ========== JavaScript ========== -->
 <script>
+  // ========== Theme Toggle with System Preference ==========
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('i');
+  const body = document.body;
+
+  // Function to set theme
+  function setTheme(theme) {
+    if (theme === 'light') {
+      body.classList.add('light-theme');
+      themeIcon.classList.remove('fa-sun');
+      themeIcon.classList.add('fa-moon');
+    } else {
+      body.classList.remove('light-theme');
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    }
+  }
+
+  // Check for saved theme preference or use system preference
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    // Use system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    // Only apply system preference if user hasn't set a preference
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // Theme toggle click handler
+  themeToggle.addEventListener('click', () => {
+    const isLight = body.classList.contains('light-theme');
+    const newTheme = isLight ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+
+  // ========== Navbar and Other Scripts ==========
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
