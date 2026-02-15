@@ -108,7 +108,8 @@
       color: var(--white-bright);
       letter-spacing: -0.02em;
     }
-    .nav-logo span { color: var(--cyan); }
+    .nav-logo .logo-text { color: var(--cyan); }
+    .nav-logo .bracket { color: var(--white-bright); }
     .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--gray-light);
@@ -900,7 +901,7 @@
 <!-- ========== Navigation ========== -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">&lt;<span>IK</span>/&gt;</a>
+    <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span><span class="logo-text">IK</span><span class="bracket">/&gt;</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
