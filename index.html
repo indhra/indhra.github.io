@@ -1423,7 +1423,7 @@
     <h4>Interested in Connecting?</h4>
     <p>Share your details and I'll get back to you quickly!</p>
     <!-- Note: Configure Formspree endpoint before use. See README.md for setup instructions -->
-    <form id="quickConnectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="quickConnectForm" action="https://formspree.io/f/xqedqnpa" method="POST">
       <div class="form-group">
         <label for="name">Name *</label>
         <input type="text" id="name" name="name" required placeholder="Your name">
@@ -1570,7 +1570,7 @@
       const formAction = quickConnectForm.getAttribute('action');
       
       // Check if form is configured with a real endpoint
-      if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+      if (!formAction || formAction.includes('xqedqnpa')) {
         e.preventDefault();
         alert('Contact form is not yet configured. Please use the email link to get in touch, or contact the site administrator to configure the form.');
         return;
