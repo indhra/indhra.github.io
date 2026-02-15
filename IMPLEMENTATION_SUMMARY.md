@@ -1,133 +1,122 @@
-# Implementation Summary
+# Implementation Summary - Gallery Automation & Changelog Features
 
-## Features Implemented
+## Problem Statement
+Users had to manually update the JavaScript `galleryPhotos` array in `index.html` whenever they added photos to the `assets/gallery/` folder. This was tedious and error-prone.
 
-### 1. Dark/Light Theme Toggle ✅
+Additionally, there was no way to track when the website was last updated or view a history of changes.
 
-**Location:** Navigation bar (top right)
+## Solution Implemented
 
-**Implementation Details:**
-- Added a theme toggle button with sun/moon icon in the navigation bar
-- Created light theme CSS variables that override the default dark theme
-- Implemented automatic system theme preference detection using `prefers-color-scheme`
-- Added localStorage support to remember user's theme preference
-- Smooth transitions between themes (0.3s ease)
+### 1. Gallery Photo Automation
+**Files Created:**
+- `generate-gallery-list.js` - Node.js script that automatically scans the gallery folder
+- `assets/gallery/photos.json` - Auto-generated list of all image files
+- `package.json` - NPM scripts for easy execution
+
+**Changes to index.html:**
+- Modified `initGalleryCarousel()` to be async
+- Changed from hardcoded array to fetch photos from `photos.json`
+- Added error handling for failed JSON fetches
 
 **How it works:**
-1. On first visit, the website detects your system's theme preference (dark/light)
-2. Click the toggle button to manually switch between themes
-3. Your preference is saved in localStorage for future visits
-4. If you haven't set a preference, the theme will update automatically when your system theme changes
+1. User adds photos to `assets/gallery/`
+2. Runs `npm run generate-gallery`
+3. Script creates/updates `photos.json` with all image files
+4. Website automatically loads and displays all photos from the JSON
 
-**Files modified:**
-- `index.html` (CSS variables, theme toggle button HTML, JavaScript implementation)
+**Supported formats:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.webp`, `.svg`
 
-### 2. Industry-Agnostic Hero Text ✅
+### 2. Changelog & Last Updated Features
+**Files Created:**
+- `generate-changelog.js` - Fetches merged PRs from GitHub API
+- `changelog.json` - Contains PR history with metadata
+- `AUTOMATION_GUIDE.md` - Complete documentation
 
-**Changes Made:**
-- **Old:** "I build data-driven solutions for the automotive future."
-- **New:** "Product-focused engineer who thrives in fast-paced, challenging environments."
+**Changes to index.html:**
+- Added subtle "Last Updated" text at footer bottom
+- Added clickable "changelog" link
+- Implemented modal overlay to view recent changes
+- Used IIFE pattern to prevent event listener duplication
 
-- **Old description:** Focus on automotive and Mercedes-Benz
-- **New description:** Emphasizes being customer-driven with deep empathy, product-focused mindset, and open to challenges across industries
+**How it works:**
+1. Script fetches all merged PRs from GitHub
+2. Generates `changelog.json` with PR details
+3. Footer displays last updated date
+4. Users can click "changelog" to see full history in modal
 
-**Files modified:**
-- `index.html` (lines around 850-853)
+### 3. Code Quality & Security
 
-### 3. Resume Download Feature ✅
+**Code Review Fixes:**
+- ✅ Fixed event listener duplication using guard flag
+- ✅ Properly filter only merged PRs (mergedAt !== null)
+- ✅ Repositioned last updated info as subtle footer text
 
-**Location:** Hero section - center button group
+**Security:**
+- ✅ CodeQL scan: 0 vulnerabilities found
+- ✅ No security issues introduced
 
-**Implementation Details:**
-- Created `assets/` folder for storing the resume PDF
-- Added "Download Resume" button in the hero section between "View My Work" and "Get In Touch"
-- Button uses Font Awesome download icon
-- When clicked, triggers download of `assets/Indhra_Kiranu_Resume.pdf`
+## Usage
 
-**Setup Required:**
-- Place your resume PDF in the `assets/` folder with the name `Indhra_Kiranu_Resume.pdf`
+### Adding Gallery Photos
+```bash
+# Add photos to folder
+cp my-photo.jpg assets/gallery/
 
-**Files created/modified:**
-- `assets/README.md` (instructions)
-- `assets/.gitkeep` (to keep folder in git)
-- `index.html` (download button)
+# Generate photo list
+npm run generate-gallery
 
-### 4. Quick Connect Contact Form ✅
+# Commit and push
+git add assets/gallery/
+git commit -m "Add new gallery photos"
+git push
+```
 
-**Location:** Contact section (bottom of page, section #07)
+### Updating Changelog
+```bash
+# Generate changelog from GitHub PRs
+npm run generate-changelog
 
-**Implementation Details:**
-- Added a simple, elegant contact form with backdrop blur effect
-- Form fields:
-  - Name (required)
-  - Email (required)
-  - Company (optional)
-  - Quick Message (optional)
-- Styled with dark theme aesthetic matching the rest of the site
-- Form submission handling with loading states and success feedback
-- Ready to integrate with Formspree, Netlify Forms, or custom backend
+# Or update both at once
+npm run generate-all
+```
 
-**Setup:**
-The form is already configured with a Formspree endpoint and ready to use. Form submissions will be sent to the configured email address.
+## NPM Scripts
+- `npm run generate-gallery` - Generate gallery photo list
+- `npm run generate-changelog` - Fetch and generate changelog
+- `npm run generate-all` - Run both generators
+- `npm run serve` - Start local development server
 
-**Alternative integrations:**
-- Netlify Forms (add `netlify` attribute to form)
-- Custom backend API
-- Other services like FormSubmit, Basin, etc.
+## Benefits
+1. **No Manual Updates** - Gallery automatically populates from folder
+2. **Transparency** - Visitors see when site was last updated
+3. **Change Tracking** - Full PR history accessible via modal
+4. **Simple Workflow** - One command updates everything
+5. **Well Documented** - Complete automation guide included
 
-**Files modified:**
-- `index.html` (form CSS, HTML, and JavaScript)
+## Testing Results
+- ✅ Gallery loads 4 photos correctly from JSON
+- ✅ Changelog modal opens and closes properly
+- ✅ Last updated displays correct date
+- ✅ All code review issues resolved
+- ✅ Security scan passed (0 vulnerabilities)
 
-## Code Quality
+## Files Modified/Created
+1. `generate-gallery-list.js` ⭐ NEW
+2. `generate-changelog.js` ⭐ NEW  
+3. `assets/gallery/photos.json` ⭐ NEW
+4. `changelog.json` ⭐ NEW
+5. `package.json` ⭐ NEW
+6. `AUTOMATION_GUIDE.md` ⭐ NEW
+7. `index.html` ✏️ MODIFIED
 
-All implementations follow:
-- ✅ Minimal changes approach
-- ✅ Consistent coding style with existing codebase
-- ✅ Proper accessibility (ARIA labels, keyboard support)
-- ✅ Responsive design (works on mobile, tablet, desktop)
-- ✅ Smooth animations and transitions
-- ✅ No external dependencies added (self-contained)
+## Future Enhancements
+- GitHub Actions workflow to auto-run generators on push
+- Automated deployment trigger when gallery/changelog updates
+- Image optimization during gallery generation
+- Enhanced changelog with PR descriptions and commit details
 
-## Testing Checklist
+---
 
-- [x] Theme toggle button appears in navigation
-- [x] Theme switches correctly between light and dark
-- [x] Theme preference is saved in localStorage
-- [x] Hero text updated correctly
-- [x] Resume download button added to hero section
-- [x] Contact form displays correctly
-- [x] Form validation works (required fields)
-- [x] All changes are committed and pushed
-
-## Next Steps for User
-
-1. **Add Resume:**
-   - Place your resume PDF as `assets/Indhra_Kiranu_Resume.pdf`
-   - Commit and push this file to the repository
-
-2. **Configure Contact Form:**
-   - Sign up at https://formspree.io/
-   - Create a form and get the form ID
-   - Update line ~1386 in `index.html` with your form ID
-   - Test the form submission
-
-3. **Deploy:**
-   - Push all changes to main branch
-   - GitHub Pages will automatically rebuild and deploy
-
-## Files Changed
-
-1. `index.html` - Main website file with all implementations
-2. `README.md` - Updated with new features and setup instructions
-3. `assets/README.md` - Instructions for resume placement
-4. `assets/.gitkeep` - Git placeholder for assets folder
-
-## Browser Compatibility
-
-All features are compatible with:
-- ✅ Chrome/Edge (latest)
-- ✅ Firefox (latest)
-- ✅ Safari (latest)
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
-System theme detection requires modern browsers (95%+ coverage).
+**Status:** ✅ Complete and Ready for Merge
+**Date:** February 15, 2026
+**PR:** copilot/update-gallery-photos-array
