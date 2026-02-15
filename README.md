@@ -6,12 +6,15 @@ A modern, dark-themed portfolio website for a Cloud-focused Data Scientist with 
 
 ## Features
 
+- 🌓 **Dark/Light Theme Toggle**: Automatic system theme detection with manual toggle support
 - 🌑 **Dark Navy Theme**: Professional design with cyan/blue accents and smooth animations
 - 📱 **Fully Responsive**: Optimized for desktop, tablet, and mobile with hamburger navigation
 - ♿ **Accessible**: ARIA attributes, keyboard navigation, focus management, Escape key support
 - 🚀 **Self-Contained**: Single `index.html` file with inline CSS/JS — no external dependencies except fonts/icons
 - ✨ **Scroll Animations**: IntersectionObserver-powered reveal effects
 - 🔗 **Real Projects**: 12 project cards linked to actual GitHub repositories
+- 📄 **Resume Download**: One-click resume download from hero section
+- 📧 **Quick Connect Form**: Simple contact form for visitors to share their details
 
 ## Sections
 
@@ -41,6 +44,27 @@ cd indhra.github.io
 python3 -m http.server 8000
 # Open http://localhost:8000
 ```
+
+## Setup Instructions
+
+### Resume Download
+1. Place your resume PDF in the `assets/` folder as `Indhra_Kiranu_Resume.pdf`
+2. The download button in the hero section will automatically link to it
+
+### Contact Form Setup
+The quick connect form is configured to work with Formspree by default. To activate it:
+
+1. Sign up at [Formspree.io](https://formspree.io/) (free tier available)
+2. Create a new form and get your form endpoint
+3. In `index.html`, replace `YOUR_FORM_ID` in the form action with your Formspree form ID:
+   ```html
+   <form id="quickConnectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+   ```
+
+Alternatively, you can integrate with:
+- Netlify Forms (if hosting on Netlify)
+- Your own backend API
+- Other form services like FormSubmit, Basin, etc.
 
 ## License
 

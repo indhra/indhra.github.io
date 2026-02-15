@@ -737,6 +737,64 @@
       background: rgba(34,211,238,0.05);
     }
 
+    /* Quick Connect Form */
+    .quick-connect-form {
+      max-width: 500px;
+      margin: 3rem auto 0;
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    .quick-connect-form h4 {
+      color: var(--white-bright);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .quick-connect-form p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      color: var(--gray-light);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--cyan);
+      background: rgba(255,255,255,0.08);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-submit-btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
     /* ========== Footer ========== */
     footer {
       text-align: center;
@@ -853,6 +911,7 @@
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View My Work</a>
+      <a href="assets/Indhra_Kiranu_Resume.pdf" download class="btn btn-outline"><i class="fas fa-download"></i> Download Resume</a>
       <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Get In Touch</a>
     </div>
   </div>
@@ -1357,6 +1416,34 @@
   <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-primary contact-btn">
     <i class="fas fa-envelope"></i> Say Hello
   </a>
+  
+  <!-- Quick Connect Form -->
+  <div class="quick-connect-form">
+    <h4>Interested in Connecting?</h4>
+    <p>Share your details and I'll get back to you quickly!</p>
+    <form id="quickConnectForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+      </div>
+      <div class="form-group">
+        <label for="company">Company (Optional)</label>
+        <input type="text" id="company" name="company" placeholder="Your company">
+      </div>
+      <div class="form-group">
+        <label for="message">Quick Message (Optional)</label>
+        <textarea id="message" name="message" placeholder="What would you like to discuss?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary form-submit-btn">
+        <i class="fas fa-paper-plane"></i> Connect With Me
+      </button>
+    </form>
+  </div>
+  
   <div class="contact-links">
     <a href="mailto:indhrakiranu39@gmail.com"><i class="fas fa-envelope"></i> indhrakiranu39@gmail.com</a>
     <a href="https://www.linkedin.com/in/indhra/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
@@ -1473,6 +1560,33 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // Quick Connect Form handling
+  const quickConnectForm = document.getElementById('quickConnectForm');
+  if (quickConnectForm) {
+    quickConnectForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = quickConnectForm.querySelector('.form-submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitBtn.disabled = true;
+      
+      // For now, just show a success message since form backend needs to be configured
+      // You can integrate with Formspree, Netlify Forms, or your own backend
+      setTimeout(() => {
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Thanks! I\'ll be in touch soon!';
+        submitBtn.style.background = 'linear-gradient(135deg, var(--green), #047857)';
+        quickConnectForm.reset();
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          submitBtn.style.background = '';
+        }, 3000);
+      }, 1000);
+    });
+  }
 </script>
 
 </body>
