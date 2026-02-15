@@ -13,8 +13,8 @@ const path = require('path');
 const GALLERY_DIR = path.join(__dirname, 'assets', 'gallery');
 const OUTPUT_FILE = path.join(__dirname, 'assets', 'gallery', 'photos.json');
 
-// Supported image file extensions
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+// Supported image file extensions (raster photo formats only)
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
 
 try {
   // Read all files in the gallery directory
