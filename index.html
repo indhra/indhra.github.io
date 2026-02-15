@@ -2147,9 +2147,13 @@
       return;
     }
 
+    // Configuration constants
+    const AUTO_SCROLL_INTERVAL = 3000; // milliseconds between slides
+    const SWIPE_THRESHOLD = 50; // pixels for swipe detection
+    const VISIBILITY_THRESHOLD = 0.5; // 50% of gallery must be visible to auto-scroll
+
     let currentSlide = 0;
     let autoScrollInterval = null;
-    const SWIPE_THRESHOLD = 50; // pixels for swipe detection
 
     // Create carousel slides
     galleryPhotos.forEach((photo, index) => {
@@ -2205,7 +2209,7 @@
 
     // Auto-scroll functionality
     function startAutoScroll() {
-      autoScrollInterval = setInterval(nextSlide, 3000); // 3 seconds
+      autoScrollInterval = setInterval(nextSlide, AUTO_SCROLL_INTERVAL);
     }
 
     function stopAutoScroll() {
@@ -2229,7 +2233,7 @@
           stopAutoScroll();
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: VISIBILITY_THRESHOLD });
 
     observer.observe(galleryContainer);
 
