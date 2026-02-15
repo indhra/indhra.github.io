@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<!--
+  ============================================================================
+  PROPRIETARY AND CONFIDENTIAL
+  Copyright © 2025 Indhra Kiranu N A. All Rights Reserved.
+  
+  NOTICE: This code is proprietary and confidential. Unauthorized copying,
+  modification, distribution, or use is strictly prohibited and will result
+  in legal action and prosecution to the fullest extent of the law.
+  
+  For licensing inquiries: indhrakiranu39@gmail.com
+  ============================================================================
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -35,6 +47,22 @@
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* ========== Light Theme ========== */
+    body.light-theme {
+      --navy: #f8fafc;
+      --navy-light: #f1f5f9;
+      --navy-lighter: #e2e8f0;
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --cyan: #0891b2;
+      --white: #1e293b;
+      --white-bright: #0f172a;
+      --gray: #475569;
+      --gray-light: #334155;
+      --green: #059669;
+      --accent: #6366f1;
+    }
+
     /* ========== Reset & Base ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
@@ -44,6 +72,7 @@
       color: var(--white);
       line-height: 1.7;
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
     }
     ::selection { background: var(--blue); color: #fff; }
     a { color: var(--cyan); text-decoration: none; transition: var(--transition); }
@@ -91,7 +120,8 @@
       color: var(--white-bright);
       letter-spacing: -0.02em;
     }
-    .nav-logo span { color: var(--cyan); }
+    .nav-logo .logo-text { color: var(--cyan); }
+    .nav-logo .bracket { color: var(--white-bright); }
     .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--gray-light);
@@ -122,6 +152,27 @@
     }
     .nav-links .resume-btn:hover { background: rgba(34,211,238,0.1); }
     .nav-links .resume-btn::after { display: none; }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      border-radius: 4px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      margin-left: 1rem;
+      font-size: 1rem;
+    }
+    .theme-toggle:hover {
+      background: rgba(34,211,238,0.1);
+      transform: rotate(20deg);
+    }
 
     /* Mobile menu */
     .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
@@ -331,9 +382,43 @@
     /* ========== About / Summary ========== */
     .about-grid {
       display: grid;
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 1fr 2.5fr 1.5fr;
       gap: 3rem;
       align-items: start;
+    }
+    .about-photo {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .about-photo img {
+      width: 100%;
+      border-radius: 12px;
+      border: 3px solid rgba(34,211,238,0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: var(--transition);
+      display: block;
+    }
+    .about-photo::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px solid var(--cyan);
+      border-radius: 12px;
+      z-index: -1;
+      transition: var(--transition);
+    }
+    .about-photo:hover img {
+      transform: translate(-8px, -8px);
+      border-color: var(--cyan);
+    }
+    .about-photo:hover::before {
+      top: 12px;
+      left: 12px;
     }
     .about-text p { color: var(--gray-light); margin-bottom: 1rem; font-size: 0.98rem; }
     .about-text p strong { color: var(--white-bright); }
@@ -699,6 +784,64 @@
       background: rgba(34,211,238,0.05);
     }
 
+    /* Quick Connect Form */
+    .quick-connect-form {
+      max-width: 500px;
+      margin: 3rem auto 0;
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    .quick-connect-form h4 {
+      color: var(--white-bright);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .quick-connect-form p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      color: var(--gray-light);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--cyan);
+      background: rgba(255,255,255,0.08);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-submit-btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
     /* ========== Footer ========== */
     footer {
       text-align: center;
@@ -770,17 +913,20 @@
 <!-- ========== Navigation ========== -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">&lt;<span>IK</span>/&gt;</a>
+    <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span><span class="logo-text">IK</span><span class="bracket">/&gt;</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about"><span>01.</span> About</a></li>
-      <li><a href="#experience"><span>02.</span> Experience</a></li>
-      <li><a href="#skills"><span>03.</span> Skills</a></li>
-      <li><a href="#projects"><span>04.</span> Projects</a></li>
-      <li><a href="#education"><span>05.</span> Education</a></li>
-      <li><a href="#certifications"><span>06.</span> Certifications</a></li>
-      <li><a href="#contact"><span>07.</span> Contact</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="mailto:indhrakiranu39@gmail.com" class="resume-btn"><i class="fas fa-envelope"></i> Hire Me</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fas fa-sun"></i>
+    </button>
     <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks" tabindex="0">
       <span></span><span></span><span></span>
     </div>
@@ -804,14 +950,16 @@
   <div class="hero-content">
     <p class="hero-greeting">Hi, my name is</p>
     <h1 class="hero-name">Indhra Kiranu N A.</h1>
-    <h2 class="hero-title">I build data-driven solutions for the automotive future.</h2>
+    <h2 class="hero-title">Product-focused engineer who thrives in fast-paced, challenging environments.</h2>
     <p class="hero-desc">
-      Cloud-focused <strong>Data Scientist</strong> with <strong>5+ years</strong> at
-      <strong>Mercedes-Benz R&amp;D</strong>, specializing in battery analytics, Azure data pipelines,
-      and deploying ML models that power the next generation of electric trucks.
+      <strong>Customer-driven Data Scientist</strong> with <strong>5+ years</strong> of experience,
+      bringing deep empathy and a product-focused mindset to build impactful data solutions.
+      Passionate about solving complex challenges across industries through innovation and collaboration.
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View My Work</a>
+      <!-- Note: Add your resume as assets/Indhra_Kiranu_Resume.pdf for download to work -->
+      <a href="assets/Indhra_Kiranu_Resume.pdf" download class="btn btn-outline"><i class="fas fa-download"></i> Download Resume</a>
       <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Get In Touch</a>
     </div>
   </div>
@@ -821,6 +969,10 @@
 <section id="about" class="section">
   <h2 class="section-label reveal"><span>01.</span> About Me</h2>
   <div class="about-grid">
+    <div class="about-photo reveal">
+      <!-- Place your professional photo as assets/indhra.jpg -->
+      <img src="assets/indhra.jpg" alt="Indhra Kiranu N A - Professional Photo" loading="lazy">
+    </div>
     <div class="about-text reveal">
       <p>
         I'm a cloud-focused Data Scientist with 5+ years of experience specializing in building and deploying
@@ -858,55 +1010,9 @@
   </div>
 </section>
 
-<!-- ========== Experience ========== -->
-<section id="experience" class="section">
-  <h2 class="section-label reveal"><span>02.</span> Where I've Worked</h2>
-  <div class="timeline reveal">
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">Senior Data Scientist</span>
-        <span class="timeline-date">Aug 2024 &ndash; Present</span>
-      </div>
-      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
-      <ul>
-        <li>Instrumental in establishing the core battery cell analytics infrastructure for Mercedes Electric Truck development in Stuttgart, managing high-volume data from over 500 cells and 100 global cyclers. Designed and maintained the automated data ingestion pipeline using Azure Data Factory (ADF) to centralize sensor telemetry into Azure Data Lake Storage (ADLS), standardizing all raw data into a structured Delta Table format.</li>
-        <li>Developed and operationalized proprietary analytical scripts to calculate mission-critical KPIs&mdash;including DCIR, State of Health (SOH), and RPT estimation&mdash;and translated these results into dynamic Power BI dashboards, creating a customer-specific framework for R&amp;D engineers to evaluate battery performance, lifetime, and safety.</li>
-        <li>Led the migration of 5 years of vehicle data (100M+ records) to Azure, building robust ADF pipelines that cut ETL time by 80%, ensuring data quality, integrity, and accessibility for modeling and analysis.</li>
-        <li>Developed and deployed ML models and AI solutions including early detection and forecasting of electric Axle failure using an Auto Associative Neural Network (AANN) with TensorFlow, resulting in a one-week early warning on vehicle downtime.</li>
-        <li>Mentored a cross-functional team of 2+ junior engineers in developing vehicle testing cases using an RAG-based open-source LLM, championing Python and ML best practices.</li>
-      </ul>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">Data Scientist</span>
-        <span class="timeline-date">Nov 2020 &ndash; Jul 2024</span>
-      </div>
-      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
-      <ul>
-        <li>Designed an ML-driven Python application that finds important safety flaws in vehicles 90% quicker than with humans; employed a user-friendly, reusable package of unsupervised clustering methods on multi-variate time series data from Trucks, enabling early failure identification and avoiding expensive recalls.</li>
-        <li>Uncovered deeper system features and performance insights by using limited data and domain expertise to close the knowledge gap between analytics and research, offering data-driven solutions through advanced analytics&mdash;Affinity analysis, statistical methods, machine learning algorithms, and data mining techniques.</li>
-      </ul>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <span class="timeline-role">Machine Learning Engineer</span>
-        <span class="timeline-date">May 2020 &ndash; Nov 2020</span>
-      </div>
-      <div class="timeline-company">Upwork &mdash; Freelance, Remote</div>
-      <ul>
-        <li>Analyzed data from retailers across 6 countries and increased book sales by 4.2% by forecasting sales using an ensemble of models with Keras; translated business problems into data science solutions for strategic decision-making and AI initiatives.</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
 <!-- ========== Skills ========== -->
 <section id="skills" class="section">
-  <h2 class="section-label reveal"><span>03.</span> Skills &amp; Technologies</h2>
+  <h2 class="section-label reveal"><span>02.</span> Skills &amp; Technologies</h2>
   <div class="skills-container reveal">
 
     <div class="skill-card">
@@ -1012,7 +1118,7 @@
 
 <!-- ========== Projects ========== -->
 <section id="projects" class="section">
-  <h2 class="section-label reveal"><span>04.</span> Featured Projects</h2>
+  <h2 class="section-label reveal"><span>03.</span> Featured Projects</h2>
   <div class="projects-grid reveal">
 
     <div class="project-card">
@@ -1220,6 +1326,52 @@
   </div>
 </section>
 
+<!-- ========== Experience ========== -->
+<section id="experience" class="section">
+  <h2 class="section-label reveal"><span>04.</span> Where I've Worked</h2>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Senior Data Scientist</span>
+        <span class="timeline-date">Aug 2024 &ndash; Present</span>
+      </div>
+      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
+      <ul>
+        <li>Instrumental in establishing the core battery cell analytics infrastructure for Mercedes Electric Truck development in Stuttgart, managing high-volume data from over 500 cells and 100 global cyclers. Designed and maintained the automated data ingestion pipeline using Azure Data Factory (ADF) to centralize sensor telemetry into Azure Data Lake Storage (ADLS), standardizing all raw data into a structured Delta Table format.</li>
+        <li>Developed and operationalized proprietary analytical scripts to calculate mission-critical KPIs&mdash;including DCIR, State of Health (SOH), and RPT estimation&mdash;and translated these results into dynamic Power BI dashboards, creating a customer-specific framework for R&amp;D engineers to evaluate battery performance, lifetime, and safety.</li>
+        <li>Led the migration of 5 years of vehicle data (100M+ records) to Azure, building robust ADF pipelines that cut ETL time by 80%, ensuring data quality, integrity, and accessibility for modeling and analysis.</li>
+        <li>Developed and deployed ML models and AI solutions including early detection and forecasting of electric Axle failure using an Auto Associative Neural Network (AANN) with TensorFlow, resulting in a one-week early warning on vehicle downtime.</li>
+        <li>Mentored a cross-functional team of 2+ junior engineers in developing vehicle testing cases using an RAG-based open-source LLM, championing Python and ML best practices.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Data Scientist</span>
+        <span class="timeline-date">Nov 2020 &ndash; Jul 2024</span>
+      </div>
+      <div class="timeline-company">Daimler Trucks Innovation Center (Mercedes-Benz R&amp;D) &mdash; Bengaluru, India</div>
+      <ul>
+        <li>Designed an ML-driven Python application that finds important safety flaws in vehicles 90% quicker than with humans; employed a user-friendly, reusable package of unsupervised clustering methods on multi-variate time series data from Trucks, enabling early failure identification and avoiding expensive recalls.</li>
+        <li>Uncovered deeper system features and performance insights by using limited data and domain expertise to close the knowledge gap between analytics and research, offering data-driven solutions through advanced analytics&mdash;Affinity analysis, statistical methods, machine learning algorithms, and data mining techniques.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Machine Learning Engineer</span>
+        <span class="timeline-date">May 2020 &ndash; Nov 2020</span>
+      </div>
+      <div class="timeline-company">Upwork &mdash; Freelance, Remote</div>
+      <ul>
+        <li>Analyzed data from retailers across 6 countries and increased book sales by 4.2% by forecasting sales using an ensemble of models with Keras; translated business problems into data science solutions for strategic decision-making and AI initiatives.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
 <!-- ========== Education ========== -->
 <section id="education" class="section">
   <h2 class="section-label reveal"><span>05.</span> Education</h2>
@@ -1316,6 +1468,34 @@
   <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-primary contact-btn">
     <i class="fas fa-envelope"></i> Say Hello
   </a>
+  
+  <!-- Quick Connect Form -->
+  <div class="quick-connect-form">
+    <h4>Interested in Connecting?</h4>
+    <p>Share your details and I'll get back to you quickly!</p>
+    <form id="quickConnectForm" action="https://formspree.io/f/xqedqnpa" method="POST">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+      </div>
+      <div class="form-group">
+        <label for="company">Company (Optional)</label>
+        <input type="text" id="company" name="company" placeholder="Your company">
+      </div>
+      <div class="form-group">
+        <label for="message">Quick Message (Optional)</label>
+        <textarea id="message" name="message" placeholder="What would you like to discuss?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary form-submit-btn">
+        <i class="fas fa-paper-plane"></i> Connect With Me
+      </button>
+    </form>
+  </div>
+  
   <div class="contact-links">
     <a href="mailto:indhrakiranu39@gmail.com"><i class="fas fa-envelope"></i> indhrakiranu39@gmail.com</a>
     <a href="https://www.linkedin.com/in/indhra/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
@@ -1327,11 +1507,59 @@
 <!-- ========== Footer ========== -->
 <footer>
   <p>Designed &amp; Built by <a href="https://github.com/indhra" target="_blank" rel="noopener noreferrer">Indhra Kiranu N A</a></p>
-  <p>&copy; 2025 &middot; Bengaluru, India</p>
+  <p>&copy; 2025 Indhra Kiranu N A &middot; All Rights Reserved &middot; Proprietary &amp; Confidential</p>
+  <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.8;">
+    Unauthorized copying, distribution, or use of this code is strictly prohibited and will result in legal action.
+  </p>
 </footer>
 
 <!-- ========== JavaScript ========== -->
 <script>
+  // ========== Theme Toggle with System Preference ==========
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('i');
+  const body = document.body;
+
+  // Function to set theme
+  function setTheme(theme) {
+    if (theme === 'light') {
+      body.classList.add('light-theme');
+      themeIcon.classList.remove('fa-sun');
+      themeIcon.classList.add('fa-moon');
+    } else {
+      body.classList.remove('light-theme');
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    }
+  }
+
+  // Check for saved theme preference or use system preference
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  } else {
+    // Use system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    // Only apply system preference if user hasn't set a preference
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // Theme toggle click handler
+  themeToggle.addEventListener('click', () => {
+    const isLight = body.classList.contains('light-theme');
+    const newTheme = isLight ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+
+  // ========== Navbar and Other Scripts ==========
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1387,6 +1615,71 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // Quick Connect Form handling
+  const quickConnectForm = document.getElementById('quickConnectForm');
+  if (quickConnectForm) {
+    quickConnectForm.addEventListener('submit', async (e) => {
+      const formAction = quickConnectForm.getAttribute('action');
+      
+      // Check if form is configured with a real endpoint
+      if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+        e.preventDefault();
+        alert('Contact form is not yet configured. Please use the email link to get in touch, or contact the site administrator to configure the form.');
+        return;
+      }
+      
+      e.preventDefault();
+      
+      const submitBtn = quickConnectForm.querySelector('.form-submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitBtn.disabled = true;
+      
+      try {
+        const formData = new FormData(quickConnectForm);
+        const response = await fetch(formAction, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          const successBtn = submitBtn;
+          successBtn.textContent = '';
+          const icon = document.createElement('i');
+          icon.className = 'fas fa-check';
+          const text = document.createTextNode(' Thanks! I\'ll be in touch soon!');
+          successBtn.appendChild(icon);
+          successBtn.appendChild(text);
+          successBtn.style.background = 'linear-gradient(135deg, var(--green), #047857)';
+          quickConnectForm.reset();
+          
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+          }, 5000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        submitBtn.textContent = '';
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-exclamation-circle';
+        const text = document.createTextNode(' Error sending. Please try email.');
+        submitBtn.appendChild(icon);
+        submitBtn.appendChild(text);
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 3000);
+      }
+    });
+  }
 </script>
 
 </body>
