@@ -63,12 +63,17 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(10, 25, 47, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(10, 25, 47, 0.98);
       border-bottom: 1px solid rgba(255,255,255,0.05);
       padding: 0 2rem;
       transition: var(--transition);
+    }
+    @supports ((backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0))) {
+      nav {
+        background: rgba(10, 25, 47, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
     }
     nav.scrolled { box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
     .nav-inner {
@@ -701,8 +706,12 @@
       color: var(--gray);
       font-size: 0.82rem;
     }
+    footer p + p { margin-top: 0.3rem; }
     footer a { color: var(--gray-light); }
     footer a:hover { color: var(--cyan); }
+    .edu-gpa i { margin-right: 4px; font-size: 0.7rem; }
+    .contact-btn { font-size: 1rem; }
+    .projects-view-all { text-align: center; margin-top: 2.5rem; }
 
     /* ========== Keyframes ========== */
     @keyframes fadeUp {
@@ -730,6 +739,18 @@
         padding: 2rem;
         gap: 1.5rem;
         box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        z-index: 1000;
+      }
+      .nav-links.active::before {
+        content: "";
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10, 25, 47, 0.7);
+        pointer-events: auto;
+        z-index: -1;
       }
       .about-grid { grid-template-columns: 1fr; }
       .section { padding: 4rem 1.2rem; }
@@ -760,7 +781,7 @@
       <li><a href="#contact"><span>07.</span> Contact</a></li>
       <li><a href="mailto:indhrakiranu39@gmail.com" class="resume-btn"><i class="fas fa-envelope"></i> Hire Me</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" tabindex="0">
+    <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks" tabindex="0">
       <span></span><span></span><span></span>
     </div>
   </div>
@@ -1192,7 +1213,7 @@
     </div>
 
   </div>
-  <div style="text-align:center; margin-top:2.5rem;" class="reveal">
+  <div class="projects-view-all reveal">
     <a href="https://github.com/indhra?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
       <i class="fab fa-github"></i> View All Repositories
     </a>
@@ -1212,7 +1233,7 @@
         <strong>Thesis:</strong> Applications of Reinforcement Learning for Predictive Maintenance, Collaborative Robotics &amp; Quantum Machine Learning for Telecom applications.<br>
         <strong>Graduated:</strong> April 2020
       </div>
-      <span class="edu-gpa"><i class="fas fa-star" style="margin-right:4px;font-size:0.7rem;"></i> GPA: 8.5 / 10.0</span>
+      <span class="edu-gpa"><i class="fas fa-star"></i> GPA: 8.5 / 10.0</span>
     </div>
 
     <div class="edu-card">
@@ -1222,7 +1243,7 @@
         <strong>Specialization:</strong> Industrial Sensors &amp; Instrumentation<br>
         <strong>Graduated:</strong> April 2018
       </div>
-      <span class="edu-gpa"><i class="fas fa-star" style="margin-right:4px;font-size:0.7rem;"></i> GPA: 7.64 / 10</span>
+      <span class="edu-gpa"><i class="fas fa-star"></i> GPA: 7.64 / 10</span>
     </div>
 
   </div>
@@ -1292,7 +1313,7 @@
     I'm currently open to new opportunities in Data Science, ML Engineering, and AI roles.
     Whether you have a question or just want to say hi, my inbox is always open!
   </p>
-  <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-primary" style="font-size:1rem;">
+  <a href="mailto:indhrakiranu39@gmail.com" class="btn btn-primary contact-btn">
     <i class="fas fa-envelope"></i> Say Hello
   </a>
   <div class="contact-links">
@@ -1306,7 +1327,7 @@
 <!-- ========== Footer ========== -->
 <footer>
   <p>Designed &amp; Built by <a href="https://github.com/indhra" target="_blank" rel="noopener noreferrer">Indhra Kiranu N A</a></p>
-  <p style="margin-top:0.3rem;">&copy; 2025 &middot; Bengaluru, India</p>
+  <p>&copy; 2025 &middot; Bengaluru, India</p>
 </footer>
 
 <!-- ========== JavaScript ========== -->
@@ -1322,6 +1343,14 @@
   const navLinks = document.getElementById('navLinks');
   function toggleMenu() {
     navLinks.classList.toggle('active');
+    const isOpen = navLinks.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+      const firstLink = navLinks.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      hamburger.focus();
+    }
   }
   hamburger.addEventListener('click', toggleMenu);
   hamburger.addEventListener('keydown', (e) => {
@@ -1330,10 +1359,19 @@
       toggleMenu();
     }
   });
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+      navLinks.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.focus();
+    }
+  });
   // Close menu on link click
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
     });
   });
 
@@ -1343,6 +1381,7 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
